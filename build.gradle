@@ -6,9 +6,20 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/3.0/userguide/tutorial_java_projects.html
  */
+buildscript {
+    repositories {
+        maven {
+            url 'http://localhost:8081/artifactory/libs-release-local/'
+        }
+    }
+}
+plugins {
+  id "org.sonarqube" version "2.0.1"
+}
 
 apply plugin: 'java'            // applies many conventions
-apply plugin: "eclipse"         
+apply plugin: "eclipse"
+        
 
 sourceCompatibility = 1.8
 version = '1.0.SNAPSHORT'
@@ -18,13 +29,6 @@ jar {
     }
 }
 
-buildscript {
-    repositories {
-        maven {
-            url 'http://localhost:8081/artifactory/libs-release-local/'
-        }
-    }
-}
 
 repositories {
      maven {
@@ -34,6 +38,6 @@ repositories {
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
+    compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '3.0.0'
     testCompile 'junit:junit:4.12'
-
 }
