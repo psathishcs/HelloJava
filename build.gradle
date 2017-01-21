@@ -21,7 +21,7 @@ apply plugin: 'java'            // applies many conventions
 apply plugin: "eclipse"
         
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
 version = '1.0.SNAPSHORT'
 jar {
     manifest {
@@ -41,7 +41,7 @@ task fatJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'Gradle Jar File Example',
         	'Implementation-Version': version,
-        	'Main-Class': 'org.hello.hbase.HBaseTest'
+        	'Main-Class': 'org.hello.mapreduce.HelloWorldCount'
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
@@ -53,5 +53,7 @@ dependencies {
     compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version: '3.0.0'
     compile(group: 'com.oracle', name: 'ojdbc6', version: '11.2.0')
     compile group: 'org.apache.hbase', name: 'hbase-client', version: '1.1.2'
+	compile group: 'org.apache.hadoop', name: 'hadoop-core', version: '1.2.1'
+	compile group: 'org.apache.kafka', name: 'kafka_2.10', version: '0.8.2.1'
     testCompile 'junit:junit:4.12'
 }
